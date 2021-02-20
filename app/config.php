@@ -17,6 +17,7 @@ class config
     public $completed_till_at = '15 minutes';//today
 
     public $create_note = true;
+    public $task_text;
 
     public $distribution = false;
 
