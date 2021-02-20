@@ -212,7 +212,7 @@ class app
 
         if($this->config->pipeline_id) $lead->pipeline_id;
 
-        if($this->config->status_id) $lead->status_id;
+        if($this->config->status_id) $lead->status_id = $this->config->status_id;
 
         if($this->config->form) {
             $status_id = \helper::switchForm($this->config->form);
