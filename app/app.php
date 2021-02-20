@@ -304,7 +304,7 @@ class app
             '----------------------',
         ];
 
-        if($this->config->note_text) $text = array_merge($text, $text_cf);
+        if($this->config->note_text) $text = array_merge($text, $this->config->note_text);
 
         $text = implode("\n", $text);
 
