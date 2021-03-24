@@ -226,11 +226,14 @@ class app
         } else
             $lead->responsible_user_id = $contact->responsible_user_id;
 
-        if($this->config->pipeline_id) $lead->pipeline_id;
+        if($this->config->pipeline_id) {
+
+            $lead->pipeline_id = $this->config->pipeline_id;
+        }
 
         if($this->config->status_id) {
 
-            $lead->status_id;
+            $lead->status_id = $this->config->status_id;
         }
 
         if($this->config->form) {
