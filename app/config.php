@@ -23,12 +23,13 @@ class config
     public $user_name;
     public $user_phone;
     public $user_email;
+    public $contact_custom_fields = null;
     public $city;
 
     public $lead_name;
     public $lead_tags = [];
     public $form;
-    public $custom_fields = [];
+    public $lead_custom_fields = null;
     public $set_utm = false;
     public $utm_content;
     public $utm_medium;

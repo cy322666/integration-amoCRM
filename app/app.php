@@ -133,6 +133,14 @@ class app
         if($this->config->city)
             $contact->cf('Телефон')->setValue($this->config->city);
 
+        if($this->config->contact_custom_fields) {
+
+            foreach ($this->config->contact_custom_fields as $key => $field) {
+
+                $contact->cf($key)->setValue($field);
+            }
+        }
+
         $contact->save();
 
         return $contact;
@@ -150,6 +158,14 @@ class app
             $contact->cf('Email')->setValue($this->config->user_email);
         if($this->config->city)
             $contact->cf('Город')->setValue($this->config->city);
+
+        if($this->config->contact_custom_fields) {
+
+            foreach ($this->config->contact_custom_fields as $key => $field) {
+
+                $contact->cf($key)->setValue($field);
+            }
+        }
 
         $contact->save();
 
@@ -212,7 +228,10 @@ class app
 
         if($this->config->pipeline_id) $lead->pipeline_id;
 
-        if($this->config->status_id) $lead->status_id;
+        if($this->config->status_id) {
+
+            $lead->status_id;
+        }
 
         if($this->config->form) {
             $status_id = \helper::switchForm($this->config->form);
@@ -226,6 +245,14 @@ class app
             $lead->cf('utm_source')->setValue($this->config->utm_source);
             $lead->cf('utm_campaign')->setValue($this->config->utm_campaign);
             $lead->cf('utm_term')->setValue($this->config->utm_term);
+        }
+
+        if($this->config->lead_custom_fields) {
+
+            foreach ($this->config->lead_custom_fields as $key => $field) {
+
+                $lead->cf($key)->setValue($field);
+            }
         }
 
         $lead->contacts_id = $contact->id;
@@ -267,6 +294,14 @@ class app
             $lead->cf('utm_source')->setValue($this->config->utm_source);
             $lead->cf('utm_campaign')->setValue($this->config->utm_campaign);
             $lead->cf('utm_term')->setValue($this->config->utm_term);
+        }
+
+        if($this->config->lead_custom_fields) {
+
+            foreach ($this->config->lead_custom_fields as $key => $field) {
+
+                $lead->cf($key)->setValue($field);
+            }
         }
 
         $lead->save();

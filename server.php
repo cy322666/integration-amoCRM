@@ -29,6 +29,22 @@ $config->user_email = 'test@ya.ru';
 $config->lead_name = 'Заявка';
 $config->lead_tags = ['site', 'dev'];
 
+$config->utm_content = '';
+$config->utm_medium = '';
+$config->utm_source = '';
+$config->utm_campaign = '';
+$config->utm_term = '';
+
+$config->lead_custom_fields = [
+    'Точное название поля' => 'Его значение',
+    'Точное название поля2' => 'Его значение',
+];
+
+$config->contact_custom_fields = [
+    'Точное название поля' => 'Его значение',
+    'Точное название поля2' => 'Его значение',
+];
+
 $app->setConfig($config);
 
 /* ЗАПУСК ЛОГИКИ */
