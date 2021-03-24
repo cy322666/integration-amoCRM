@@ -17,7 +17,7 @@ class config
     public $completed_till_at = '15 minutes';//today
 
     public $create_note = true;
-    public $note_text;
+    public $note_text = [];
 
     public $distribution = false;
 
