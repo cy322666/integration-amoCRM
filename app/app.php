@@ -340,7 +340,7 @@ class app
 
     private function createNote($lead)
     {
-        $text_cf = \helper::createTextNote($this->config->custom_fields);
+        //$text_cf = \helper::createTextNote($this->config->custom_fields);
 
         $array = [
             'Новая заявка с сайта',
@@ -351,9 +351,9 @@ class app
             '----------------------',
         ];
 
-        $textArray = array_merge($array, $text_cf);
+        if($this->config->note_text) $text = array_merge($array, $this->config->note_text);
 
-        $text = implode("\n", $textArray);
+        $text = implode("\n", $text);
 
         $note = $this->amoCRM->notes()->create();
         $note->note_type = 4;
