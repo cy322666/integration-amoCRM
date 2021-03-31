@@ -150,7 +150,10 @@ class app
     {
         $contact = $this->amoCRM->contacts()->create();
 
-        $contact->name = $this->config->user_name ? $this->config->user_name : 'Неизвестно';
+        $contact->name = $this->config->user_name != null ? $this->config->user_name : 'Неизвестно';
+
+        if($this->config->responsible_id)
+            $contact->responsible_user_id = $this->config->responsible_id;
 
         if($this->config->user_phone)
             $contact->cf('Телефон')->setValue($this->config->user_phone);
