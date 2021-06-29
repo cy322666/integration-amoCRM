@@ -238,6 +238,11 @@ class app
 
             $lead->status_id = $this->config->status_id;
         }
+        //бюджет
+        if($this->config->sale) {
+
+            $lead->sale = $this->config->sale;
+        }
 
         if($this->config->form) {
             $status_id = \helper::switchForm($this->config->form);
