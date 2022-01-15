@@ -90,15 +90,13 @@ class app
         //print_r($this->config); exit;
 
         if($contact == null) $contact = $this->createContact();
-        else
-            $contact = $this->updateContact($contact);
+        // else $contact = $this->updateContact($contact);
 
         if($this->config->control_double)
             $lead = $this->searchLead($contact);
 
         if($lead == null) $lead = $this->createLead($contact);
-        else
-            $lead = $this->updateLead($lead);
+        // else $lead = $this->updateLead($lead);
 
         if($this->config->create_task) $this->createTask($lead);
 
@@ -112,11 +110,11 @@ class app
                 ->contacts()
                 ->searchByPhone($this->config->user_phone);
 
-        if($contacts == null || $contacts->first() == null)
-            if($this->config->user_email)
-                $contacts = $this->amoCRM
-                    ->contacts()
-                    ->searchByEmail($this->config->user_email);
+//        if($contacts == null || $contacts->first() == null)
+//            if($this->config->user_email)
+//                $contacts = $this->amoCRM
+//                    ->contacts()
+//                    ->searchByEmail($this->config->user_email);
 
         if($contacts == null || $contacts->first() == null)
             return null;
@@ -186,29 +184,33 @@ class app
                 if ($arrayLead['status_id'] != 143 &&
                     $arrayLead['status_id'] != 142) {
 
-                        if($this->config->pipeline_ignore[0]) {
+                    if($this->config->pipelines_ignore !== null) {
 
-                            if($this->checkPipelineIgnore($arrayLead))
-                                continue;
+                        if($this->isPipelineIgnore($arrayLead) == true) {
+
+                            continue;
                         }
-
-                        $lead = $this->amoCRM
-                            ->leads()
-                            ->find($arrayLead['id']);
-                        return $lead;
+                    }
+    
+                    return $this->amoCRM
+                        ->leads()
+                        ->find($arrayLead['id']);
                     }
                 }
             }
         }
 
-    private function checkPipelineIgnore($arrayLead)
-        {
-            foreach ($this->config->pipeline_ignore as $pipeline) {
+    private function isPipelineIgnore(array $arrayLead) : bool
+    {
+        foreach ($this->config->pipelines_ignore as $pipeline_ignore) {
 
-                if($arrayLead['pipeline_id'] == $pipeline);
-                    return true;
+            if($arrayLead['pipeline_id'] == $pipeline_ignore) {
+                
+                return true;
             }
         }
+        return false;
+    }
 
     private function createLead($contact)
     {
